@@ -53,7 +53,7 @@ export default function Cart() {
                             <p className="text-[#B88E2F] font-semibold">Rs. 250,000.00</p>
                         </div>
                     </div>
-                    <Buttonbord item="Check Out"/>
+                   <Link href={"/checkout"}><Buttonbord item="Check Out"/></Link>
                 </div>
             </div>
             {/* Features */}
