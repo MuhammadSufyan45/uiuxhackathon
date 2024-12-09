@@ -1,12 +1,12 @@
 interface data {
-        "id": String,
-        "title": String,
-        "Subtitle": String,
-        "description": String,
-        "price": String,
-        "tag": String,
-        "discount": String,
-        "image": String   
+        "id": string,
+        "title": string,
+        "Subtitle": string,
+        "description": string,
+        "price": string,
+        "tag": string,
+        "discount": string,
+        "image": string   
 }
 
 export const Data:data[] = [

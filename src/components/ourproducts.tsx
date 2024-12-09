@@ -1,5 +1,3 @@
-import Image from "next/image";
-import { Data } from "@/data/data";
 import Product1 from "./product1";
 import Product2 from "./product2";
 import Product3 from "./product3";
@@ -10,8 +8,6 @@ import Product7 from "./product7";
 import Product8 from "./product8";
 
 export default function Products() {
-    const detail = Data;
-
     return (
         <div className="flex flex-col items-center gap-y-8">
             <h2 className="text-4xl font-bold text-[#333333] text-center">Our Products</h2>

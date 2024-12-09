@@ -4,7 +4,6 @@ import Products from "@/components/ourproducts";
 import Share from "@/components/sharesetup";
 import Image from "next/image";
 import slider from '../../public/slider.png';
-import Carousel from "@/components/carousel";
 
 export default function Home() {
   return (
