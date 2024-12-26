@@ -5,8 +5,10 @@ import Feature from "@/components/features";
 
 export default function Checkout() {
     return (
-        <div className="max-w-[1440px] h-auto">
-            {/* Cart hero */}
+        
+        <div className="flex flex-col items-center">
+            <div className="max-w-[1440px] h-auto">
+            {/* Checkout hero */}
             <div className="text-center py-24 flex flex-col items-center space-y-4" style={{ backgroundImage: "url('/shop.png')" }}>
                 <Image src={logo} alt="logo" />
                 <h2 className="text-4xl font-semibold">Checkout</h2>
@@ -148,6 +150,7 @@ export default function Checkout() {
             </div>
             {/* Feature */}
             <Feature />
+        </div>
         </div>
     )
 }

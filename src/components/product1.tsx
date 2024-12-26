@@ -38,7 +38,7 @@ export default function Product1() {
                         <i className="fas fa-share-alt text-white"></i>
                         <p className="sm:text-sm text-xs text-white">Share</p>
                     </div>
-                    <Link href={`/cart`}>
+                    <Link href={`/comparison`}>
                     <div className="flex items-center gap-x-1">
                         <i className="fas fa-exchange-alt text-white"></i>
                         <p className="sm:text-sm text-xs text-white">Compare</p>
