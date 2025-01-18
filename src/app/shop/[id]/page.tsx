@@ -8,8 +8,62 @@ import main from "../../../../public/main.png";
 import Buttonbord from "@/components/buttonbord";
 import Description from "@/components/description";
 import Related from "@/components/related";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 
-export default function Prod() {
+const truncateDescription = (text: string, maxLength: number) => {
+    if (text.length > maxLength) {
+        return text.substring(0, maxLength) + '...';
+    }
+    return text;
+};
+
+export default async function Prod({ params }: { params: { id: string } }) {
+
+    interface Product {
+        _id: string;
+        title: string;
+        description: string;
+        productImage: {
+            asset: {
+                url: string;
+            };
+        };
+        tags: string[];
+        price: number;
+    };
+
+
+    const query = `*[_type == "product"]{
+            _id,
+            title,
+            description,
+            productImage {
+              asset -> {
+                url
+              },
+            },
+            tags,
+            price
+           } `;
+
+    const product = await client.fetch(query);
+    const { id } = params;
+
+    const detail = product.find((prod: Product) => prod._id === id);
+
+
+    if (!detail) {
+        return (
+            <div>
+                <h1>Product not found</h1>
+                <button className="bg-[#F9F1E7] px-2 py-1 text-black hover:bg-[#ffd7a6] ml-[510px] mt-6">
+                    <Link href="/">Go Back</Link>
+                </button>
+            </div>
+        );
+    }
+
     return (
         <div>
             <div className="max-w-[1440px] h-[80px] sm:px-16 px-6 bg-[#F9F1E7] flex items-center justify-between">
@@ -24,21 +78,21 @@ export default function Prod() {
 
                     <div className="h-[26px] w-[1px] bg-gray-600 hidden sm:block" />
 
-                    <p className="text-xs font-semibold font-poppins">Asgard sofa</p>
+                    <p className="text-xs font-semibold font-poppins">{detail.title}</p>
                 </div>
             </div>
             {/* Product Detail */}
             <div className="flex flex-col space-y-8 sm:flex-row gap-x-24 sm:px-16 px-8 py-6">
                 {/* images */}
                 <div className="flex gap-x-4">
-                    <div className="sm:space-y-6 space-y-2">
+                    {/* <div className="sm:space-y-6 space-y-2">
                         <Image src={det1} alt="1" className="bg-[#F9F1E7] py-3 rounded-md sm:w-[60px] w-[50px]" />
                         <Image src={det2} alt="2" className="bg-[#F9F1E7] py-3 rounded-md sm:w-[60px] w-[50px]" />
                         <Image src={det3} alt="3" className="bg-[#F9F1E7] py-3 rounded-md sm:w-[60px] w-[50px]" />
                         <Image src={det4} alt="4" className="bg-[#F9F1E7] py-3 rounded-md sm:w-[60px] w-[50px]" />
-                    </div>
-                    <div className="bg-[#F9F1E7] sm:h-[420px] sm:w-[400px] w-[280px] h-[280px] py-3 rounded-md flex justify-center">
-                        <Image src={main} alt="main" />
+                    </div> */}
+                    <div className="bg-[#F9F1E7] sm:h-[420px] sm:w-[420px] w-[280px] h-[280px] py-3 rounded-md flex justify-center">
+                        <Image src={urlFor(detail.productImage.asset.url).url()} width={400} height={400} alt="main" />
                     </div>
                 </div>
                 {/* details */}
@@ -46,8 +100,8 @@ export default function Prod() {
                     <div className="sm:space-y-4 space-y-8">
                         <div className="sm:space-y-2 space-y-4 font-poppins">
                             <div className="font-poppins">
-                                <h2 className="text-2xl font-medium">Asgaard sofa</h2>
-                                <h2 className="text-md text-[#9F9F9F]">Rs. 250,000.00</h2>
+                                <h2 className="text-2xl font-medium">{detail.title}</h2>
+                                <h2 className="text-md text-[#9F9F9F]">${detail.price}</h2>
                             </div>
                             <div className="flex items-center gap-x-6">
                                 <div className="text-xs space-x-1">
@@ -60,7 +114,7 @@ export default function Prod() {
                                 <div className="w-[1px] h-[26px] bg-[#9F9F9F]" />
                                 <p className="text-[#9F9F9F] text-xs">5 Customer Review</p>
                             </div>
-                            <p className="text-xs sm:w-[400px]">Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.</p>
+                            <p className="text-xs sm:w-[400px]">{truncateDescription(detail.description, 800)}</p>
                         </div>
                         {/* colors */}
                         <div>
@@ -110,7 +164,7 @@ export default function Prod() {
                         <div className="flex flex-col gap-y-3 text-xs font-poppins text-[#9F9F9F]">
                             <p>SS001</p>
                             <p>Sofas</p>
-                            <p>Sofa, Chair, Home, Shop</p>
+                            <p>{detail.tags}</p>
                             <div className="space-x-2 text-black">
                                 <i className="fab fa-facebook-f text-md"></i>
                                 <i className="fab fa-linkedin-in text-md"></i>
