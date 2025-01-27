@@ -2,6 +2,8 @@ import Footer from "@/components/footer";
 import Navbar from "@/components/navbar";
 import type { Metadata } from "next";
 import "tailwindcss/tailwind.css";
+import Provider from '../app/redux/provider';
+import { SearchProvider } from "./search/searchcontext";
 
 
 
@@ -28,9 +30,15 @@ export default function RootLayout({
           />
         </head>
       <body>
+        <SearchProvider>
+       <Provider>
         <Navbar />
+        <div >
         {children}
+        </div>
         <Footer />
+        </Provider>
+        </SearchProvider>
       </body>
     </html>
   );

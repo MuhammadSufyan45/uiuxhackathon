@@ -1,10 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import det1 from "../../../../public/det1.png";
-import det2 from "../../../../public/det2.png";
-import det3 from "../../../../public/det3.png";
-import det4 from "../../../../public/det4.png";
-import main from "../../../../public/main.png";
 import Buttonbord from "@/components/buttonbord";
 import Description from "@/components/description";
 import Related from "@/components/related";
@@ -18,7 +13,11 @@ const truncateDescription = (text: string, maxLength: number) => {
     return text;
 };
 
-export default async function Prod({ params }: { params: { id: string } }) {
+interface params {
+    params : { id : string}
+}
+
+export default async function Prod({ params }: params) {
 
     interface Product {
         _id: string;
@@ -164,7 +163,7 @@ export default async function Prod({ params }: { params: { id: string } }) {
                         <div className="flex flex-col gap-y-3 text-xs font-poppins text-[#9F9F9F]">
                             <p>SS001</p>
                             <p>Sofas</p>
-                            <p>{detail.tags}</p>
+                            <p>{detail.tags.join(", ")}</p>
                             <div className="space-x-2 text-black">
                                 <i className="fab fa-facebook-f text-md"></i>
                                 <i className="fab fa-linkedin-in text-md"></i>
@@ -175,7 +174,7 @@ export default async function Prod({ params }: { params: { id: string } }) {
                 </div>
             </div>
             <Description />
-            <Related />
+            <Related tags={detail.tags}/>
         </div>
     )
 }
