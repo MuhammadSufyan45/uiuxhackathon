@@ -33,10 +33,10 @@ export default function RootLayout({
         <SearchProvider>
        <Provider>
         <Navbar />
-        <div >
+        <div className="flex flex-col items-center">
         {children}
-        </div>
         <Footer />
+        </div>        
         </Provider>
         </SearchProvider>
       </body>

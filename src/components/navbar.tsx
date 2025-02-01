@@ -35,7 +35,7 @@ export default function Navbar() {
   const subtotal = items.reduce((total, item) => total + item.price, 0);
 
   return (
-    <div className="max-w-[1440px] h-auto sm:px-8 sm:py-4 px-4 py-2 relative">
+    <div className="max-w-full h-auto sm:px-8 sm:py-4 px-4 py-2 relative">
       <div className="flex items-center justify-between max-w-[1440px] mx-auto sm:space-x-16">
         {/* Logo */}
         <div className="flex items-center gap-x-1">
