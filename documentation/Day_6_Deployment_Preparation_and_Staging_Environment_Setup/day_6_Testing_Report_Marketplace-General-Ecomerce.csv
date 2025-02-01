@@ -1,0 +1,9 @@
+Test Case ID,Test Case Description,Test Steps,Expected Result,Actual Result,Status,Severity Level,Assigned To,Remarks
+TC001,Validate product listing page,Open product page > Verify products,Products displayed correctly,Products displayed correctly,Passed,Low,-,No issues found
+TC002,Test API error handling,Disconnect API or make invalid query > Refresh page,Fallback UI with error message if query doesn't pull data,Fallback UI displayed as expected,Passed,Medium,-,Handled gracefully
+TC003,Verify cart functionality,Add product to cart > Verify cart contents,Cart updates with added product,Cart updates as expected,Passed,High,-,Works as expected
+TC004,Check mobile responsiveness,Resize browser window > Verify layout adjustment,Layout adapts to screen size,Layout adjusts properly,Passed,Medium,-,Test successful
+TC005,Check product page load,Open product page > Observe page load,Page loads within 3 seconds,Page loads as expected,Passed,High,-,Works as expected
+TC006,Validate security in production,Run security scan > Check for vulnerabilities,No security issues found,No vulnerabilities detected,Passed,High,-,No issues found
+TC007,Measure page load time,Reload product page multiple times,Page load time under 2 seconds,Page loads under 2 seconds,Passed,Medium,-,Performance meets expectations
+TC008,Check application stability,Test functionality post-deployment,Application runs smoothly without errors,Application stable,Passed,Medium,-,No issues found

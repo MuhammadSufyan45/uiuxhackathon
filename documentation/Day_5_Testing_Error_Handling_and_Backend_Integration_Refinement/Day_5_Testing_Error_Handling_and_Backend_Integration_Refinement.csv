@@ -1,0 +1,11 @@
+,,,,,,,,
+Test Case ID,Test Case Description,Test Steps,Expected Outcome,Actual Outcome,Status,Severity Level,Assigned To,Notes
+TC001,Validate product display page,Open the product page > Verify that the products appear,Products are shown accurately,Products are shown correctly,Passed,Low,-,No issues detected
+TC002,Verify cart functionality,Add an item to the cart > Check cart contents,Cart updates with the added product,Cart reflects the added product as expected,Passed,High,-,Functions as intended
+TC003,Test mobile responsiveness,Resize the browser > Check the layout on various sizes,Layout adjusts appropriately to screen dimensions,Layout adapts correctly across devices,Passed,Medium,-,Test successful
+TC004,Validate sign-up and sign-in processes,Sign up with valid credentials > Sign in with the same details,Both sign-up and sign-in work as intended,Sign-up and sign-in work as expected,Passed,Low,-,Verified successfully
+TC005,Verify cart item quantity adjustments,Add product to cart > Increase quantity > Decrease quantity,Cart updates the quantity as expected,Cart functions without issues,Passed,Medium,-,Cart actions work correctly
+TC006,Validate search feature with edge cases,Search for known products > Search with invalid queries,Search yields accurate results or shows error messages,Search functions correctly with edge cases,Passed,Low,-,Edge cases handled properly
+TC007,Test UI responsiveness on different devices,"Test layout on desktop, tablet, and mobile",UI adapts and functions across all devices,UI adjusts properly on all devices,Passed,Medium,-,Test successful
+TC008,Test compatibility across browsers,"Test application on Chrome, Firefox, Edge, Safari",App runs smoothly on all browsers,App performs well on all tested browsers,Passed,Medium,-,Test successful
+TC009,Test app performance under load,Conduct load tests with multiple users and heavy data,App sustains performance during load,App remains stable under load,Passed,High,-,Test successful
