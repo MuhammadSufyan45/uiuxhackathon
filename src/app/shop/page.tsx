@@ -46,10 +46,15 @@ export default function Shop() {
 
   useEffect(() => {
     async function fetchProducts() {
-      const data = await client.fetch(query);
-      setProducts(data);
+      try {
+        const data = await client.fetch(query);
+        setProducts(data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        // Optionally set an error state to show a message in the UI
+      }
     }
-
+  
     fetchProducts();
   }, []);
 

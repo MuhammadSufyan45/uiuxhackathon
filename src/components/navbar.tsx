@@ -129,9 +129,9 @@ export default function Navbar() {
             </div>
             <div className="w-full h-[1px] bg-gray-200" />
             <div className="flex gap-x-4">
-              <button className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Cart</button>
-              <button className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Checkout</button>
-              <button className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Comparison</button>
+             <Link href={'/cart'}><button className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Cart</button></Link>
+              <Link href={'/checkout'}><button className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Checkout</button></Link>
+              <Link href={'/comparison'}><button className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Comparison</button></Link>
             </div>
           </div>
         </div>
