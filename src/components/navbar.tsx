@@ -9,11 +9,13 @@ import { remove } from '../app/redux/cartslice'; // Import the remove action
 import Link from "next/link";
 import { useSearch } from "@/app/search/searchcontext";
 import Menu from '../components/menu'; // Import Menu component
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const dispatch = useDispatch();
   const items = useSelector((state: RootState) => state.cart);
   const { searchTerm, setSearchTerm } = useSearch();
+  const router = useRouter();
 
   // State to toggle the cart modal
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -31,8 +33,14 @@ export default function Navbar() {
     setSearchTerm(e.target.value); 
   };
 
+  // Handle navigation and close cart modal
+  const handleNavigation = (path: string) => {
+  setIsCartOpen(false); // Close the cart modal
+  router.push(path); // Navigate to the specified path
+};
+
   // Calculate subtotal (price is already a number)
-  const subtotal = items.reduce((total, item) => total + item.price, 0);
+  const subtotal = items.reduce((total, item) => total + item.price * (item.quantity || 1), 0);
 
   return (
     <div className="max-w-full h-auto sm:px-8 sm:py-4 px-4 py-2 relative">
@@ -93,19 +101,22 @@ export default function Navbar() {
             <div className="w-[200px] h-[1px] bg-gray-200" />
             <div className="space-y-4 mt-4">
               {/* Loop through cart items */}
-              {items.map((item) => (
+               {items.length === 0 ? (
+                <p className="text-center text-gray-500">Your cart is empty.</p>
+              ) : (
+              items.map((item) => (
                 <div key={item._id} className="flex gap-x-6 items-center font-poppins">
                   <Image
                     src={item.productImage.asset.url}
                     alt={item.title}
-                    className="w-[70px] bg-[#F9F1E7]"
+                    className="bg-[#F9F1E7] w-14 h-14 object-cover rounded-md"
                     width={70}
                     height={70}
                   />
                   <div className="space-y-2 text-xs">
                     <h4>{item.title}</h4>
                     <div className="flex gap-x-4">
-                      <p>1</p>
+                      <p>{item.quantity}</p>
                       <p>x</p>
                       <p className="text-[#B88E2F]">${item.price}</p>
                     </div>
@@ -117,7 +128,7 @@ export default function Navbar() {
                     <Image src='/cut.png' width={20} height={0} alt="remove" />
                   </button>
                 </div>
-              ))}
+              )))}
             </div>
           </div>
 
@@ -129,9 +140,9 @@ export default function Navbar() {
             </div>
             <div className="w-full h-[1px] bg-gray-200" />
             <div className="flex gap-x-4">
-             <Link href={'/cart'}><button className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Cart</button></Link>
-              <Link href={'/checkout'}><button className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Checkout</button></Link>
-              <Link href={'/comparison'}><button className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Comparison</button></Link>
+             <button onClick={()=>handleNavigation('/cart')} className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Cart</button>
+              <button onClick={()=>handleNavigation('checkout')} className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Checkout</button>
+              <button onClick={()=>handleNavigation('/comparison')} className="text-xs border-2 border-gray-500 rounded-lg px-4 py-1 hover:bg-gray-500 hover:text-white">Comparison</button>
             </div>
           </div>
         </div>

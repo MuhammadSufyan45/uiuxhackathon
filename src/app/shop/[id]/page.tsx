@@ -17,7 +17,9 @@ interface PageProps {
     params : { id : string}
 }
 
-export default async function Prod({ params }: PageProps) {
+export default async function Prod({ params }:{
+    params: Promise<{ id: string }>
+  }) {
 
     interface Product {
         _id: string;
@@ -47,7 +49,7 @@ export default async function Prod({ params }: PageProps) {
            } `;
 
     const product : Product[] = await client.fetch(query);
-    const { id } = params;
+    const { id } = await params;
 
     const detail = product.find((prod: Product) => prod._id === id);
 
